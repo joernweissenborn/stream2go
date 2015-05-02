@@ -1,6 +1,6 @@
 package stream2go
 
-func NewSuscription(index int, close chan int, sr Suscribor) (s Suscription) {
+func NewSuscription(index int, close chan int, sr Suscriber) (s Suscription) {
 	s.in = make(chan interface {})
 	s.add = make(streamchannel)
 	go s.add.pipe(s.in)
@@ -17,7 +17,7 @@ type Suscription struct {
 	index int
 	close chan int
 
-	sr Suscribor
+	sr Suscriber
 }
 
 func (s Suscription) run(){
