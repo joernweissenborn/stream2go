@@ -28,7 +28,9 @@ func (s Suscription) run(){
 
 
 func (s Suscription) Close() {
-	s.close <- s.index
+	defer func() {recover()}()
+	  s.close <-s.index
+
 }
 
 
