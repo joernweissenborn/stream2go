@@ -11,12 +11,13 @@ func (sc streamchannel) pipe(t chan interface {}){
 				pile = append(pile,<-sc)
 			} else {
 				select {
+				case t <- pile[0]:
+					pile = pile[1:]
 				case d, ok := <-sc:
 					if !ok {return}
 					pile = append(pile,d)
 
-				case t <- pile[0]:
-					pile = pile[1:]
+
 				}
 			}
 		}
